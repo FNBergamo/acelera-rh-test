@@ -1,15 +1,18 @@
 export interface Customer {
   id: number
   name: string
-  email: string
+  salary: number
+  companyValue: number
 }
 
 export interface CreateCustomerDto {
   name: string
-  email: string
+  salary: number
+  companyValue: number
 }
 
 export interface UpdateCustomerDto {
   name?: string
-  email?: string
+  salary?: number
+  companyValue?: number
 }

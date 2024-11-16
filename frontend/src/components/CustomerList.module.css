@@ -1,0 +1,17 @@
+.customerList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.totalClients {
+  margin-top: 30px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+}

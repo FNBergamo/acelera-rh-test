@@ -15,7 +15,6 @@
   left: -275px;
   position: absolute;
   max-width: 260px;
-  position: absolute;
   top: 0;
   z-index: 3;
 }
@@ -29,6 +28,8 @@
   display: block;
   padding-top: 48px;
   padding-left: 24px;
+  height: calc(100vh - 135px);
+  background-color: #ffffff;
 }
 
 .menuOption {
