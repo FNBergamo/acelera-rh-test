@@ -1,0 +1,15 @@
+import { useState } from 'react'
+import { Header } from '../components/Header'
+import { Sidebar } from '../components/Sidebar'
+import s from './Home.module.css'
+
+export function Home() {
+  const [isSidebarOpen, setSidebarOpen] = useState<boolean>(false)
+
+  return (
+    <div className={s.home}>
+      <Header isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <Sidebar isSidebarOpen={isSidebarOpen} setSidebarOpen={setSidebarOpen} />
+    </div>
+  )
+}

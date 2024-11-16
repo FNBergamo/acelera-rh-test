@@ -1,0 +1,73 @@
+.menu {
+  display: block;
+  height: 100%;
+}
+
+.logoWrapper {
+  padding: 40px 80px;
+  background-color: #363636;
+  border-top-right-radius: 10px;
+  position: relative;
+}
+
+.navbar {
+  transition: left 0.5s ease;
+  left: -275px;
+  position: absolute;
+  max-width: 260px;
+  position: absolute;
+  top: 0;
+  z-index: 3;
+}
+
+.navbar.open {
+  left: 0;
+}
+
+.navbar ul {
+  gap: 0;
+  display: block;
+  padding-top: 48px;
+  padding-left: 24px;
+}
+
+.menuOption {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 17px;
+  padding: 12px;
+}
+
+.menuOption p {
+  color: #141414;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: left;
+  display: inline-block;
+}
+
+.menuIcon {
+  width: 17px;
+}
+
+.arrowButton {
+  background-color: #1f1f1f;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -15px;
+  bottom: -15px;
+}
+
+.leftArrow {
+  width: 16px;
+}
+
+.greetings {
+  display: none;
+}
