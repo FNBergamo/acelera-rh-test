@@ -9,6 +9,11 @@ async function bootstrap() {
     logger: WinstonModule.createLogger(winstonLoggerConfig),
   });
 
+  app.enableCors({
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  });
+
   const config = new DocumentBuilder()
     .setTitle('API de Clientes')
     .setDescription('API para gerenciamento de clientes no sistema')
