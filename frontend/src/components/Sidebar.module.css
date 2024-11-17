@@ -5,7 +5,7 @@
 
 .logoWrapper {
   padding: 40px 80px;
-  background-color: #363636;
+  background-color: var(--mine-shaft);
   border-top-right-radius: 10px;
   position: relative;
 }
@@ -29,7 +29,7 @@
   padding-top: 48px;
   padding-left: 24px;
   height: calc(100vh - 135px);
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 
 .menuOption {
@@ -41,7 +41,7 @@
 }
 
 .menuOption p {
-  color: #141414;
+  color: var(--cod-gray);
   font-size: 16px;
   font-weight: 500;
   text-align: left;
@@ -53,7 +53,7 @@
 }
 
 .arrowButton {
-  background-color: #1f1f1f;
+  background-color: var(--mine-shaft-darker);
   width: 42px;
   height: 42px;
   border-radius: 50%;

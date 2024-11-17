@@ -21,11 +21,11 @@
 
 .input,
 input[type='text'] {
-  border: 2px solid rgb(217, 217, 217);
+  border: 2px solid var(--alto);
   border-radius: 4px;
   padding: 14px 10px;
   background-color: transparent;
-  color: #000000;
+  color: var(--black);
   font-size: 16px;
   font-weight: 400;
   line-height: 19px;
@@ -37,7 +37,7 @@ input[type='number'] {
 }
 
 .submitButton {
-  color: #ffffff;
+  color: var(--white);
   font-size: 14px;
   font-weight: 700;
   line-height: 17px;

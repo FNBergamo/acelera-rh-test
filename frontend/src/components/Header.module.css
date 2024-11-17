@@ -21,7 +21,7 @@
   align-items: center;
   position: relative;
   top: 0;
-  background-color: #ffffff;
+  background-color: var(--white);
   box-shadow: 0px 2px 2px 0px #0000001a;
   height: 100px;
   overflow: hidden;
@@ -61,7 +61,7 @@
 .menuOption {
   background-color: transparent;
   padding: 0;
-  color: #000;
+  color: var(--black);
   font-size: 16px;
   font-weight: 400;
   border: none;

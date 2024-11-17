@@ -11,7 +11,7 @@
 }
 
 .modalContent {
-  background: #ffffff;
+  background: var(--white);
   padding: 20px;
   border-radius: 4px;
   position: relative;
@@ -26,7 +26,7 @@
   border: none;
   font-size: 28px;
   cursor: pointer;
-  color: #0f1729;
+  color: var(--ebony);
   z-index: 999999;
   width: fit-content;
   font-weight: 400;

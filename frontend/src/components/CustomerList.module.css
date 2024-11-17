@@ -18,8 +18,8 @@
 }
 
 .createClientButton {
-  border: 2px solid #ec6724;
-  color: #ec6724;
+  border: 2px solid var(--tango);
+  color: var(--tango);
   border-radius: 4px;
   font-size: 14px;
   font-weight: 700;
