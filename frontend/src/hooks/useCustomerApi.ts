@@ -3,8 +3,18 @@ import api from '../api/api'
 import { CreateCustomerDto, Customer, UpdateCustomerDto } from '../interfaces/customer'
 
 export function useCustomerApi() {
-  async function fetchCustomers() {
-    return await api.get<Customer[]>('/')
+  async function fetchCustomers(
+    page: number = 1,
+    limit: number = 16,
+  ): Promise<{ customers: Customer[]; total: number }> {
+    const response = await api.get<{ customers: Customer[]; total: number }>(`/`, {
+      params: {
+        page,
+        limit,
+      },
+    })
+
+    return response.data
   }
 
   async function fetchCustomersById(id: number) {

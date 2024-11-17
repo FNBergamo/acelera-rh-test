@@ -14,11 +14,25 @@ export class CustomerService {
     @Inject(WINSTON_MODULE_NEST_PROVIDER) private readonly logger: Logger,
   ) {}
 
-  async findAll(): Promise<Customer[]> {
-    this.logger.debug('Fetching all customers');
-    const customers = await this.customerRepository.find();
-    this.logger.debug(`Found ${customers.length} customers`);
-    return customers;
+  async findAll(
+    page: number = 1,
+    limit: number = 16,
+  ): Promise<{ customers: Customer[]; total: number }> {
+    this.logger.debug(
+      `Fetching customers for page ${page} with limit ${limit}`,
+    );
+
+    const adjustedLimit = Math.min(limit, 40);
+
+    const [customers, total] = await this.customerRepository.findAndCount({
+      skip: (page - 1) * adjustedLimit,
+      take: adjustedLimit,
+    });
+
+    this.logger.debug(
+      `Found ${customers.length} customers out of ${total} total customers`,
+    );
+    return { customers, total };
   }
 
   async findOne(id: number): Promise<Customer> {

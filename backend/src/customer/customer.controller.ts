@@ -6,11 +6,18 @@ import {
   Body,
   Put,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { Customer } from './customer.entity';
 import { ResponseCustomerDto } from './dto/response-customer.dto';
 
@@ -20,14 +27,36 @@ export class CustomerController {
   constructor(private readonly customerService: CustomerService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Listar todos os clientes' })
+  @ApiOperation({ summary: 'Listar todos os clientes com paginação' })
+  @ApiQuery({
+    name: 'page',
+    type: Number,
+    required: false,
+    description: 'Número da página (opcional, padrão: 1)',
+  })
+  @ApiQuery({
+    name: 'limit',
+    type: Number,
+    required: false,
+    description:
+      'Número de registros por página (opcional, padrão: 16, máximo: 40)',
+  })
   @ApiResponse({
     status: 200,
     description: 'Clientes encontrados com sucesso.',
-    type: [ResponseCustomerDto],
+    schema: {
+      type: 'object',
+      properties: {
+        data: {
+          type: 'array',
+          items: { $ref: '#/components/schemas/ResponseCustomerDto' },
+        },
+        total: { type: 'number', description: 'Total de clientes encontrados' },
+      },
+    },
   })
-  findAll() {
-    return this.customerService.findAll();
+  findAll(@Query('page') page = 1, @Query('limit') limit = 16) {
+    return this.customerService.findAll(page, limit);
   }
 
   @Get(':id')

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
 import { Customer } from '../interfaces/customer'
 import { useCustomerApi } from '../hooks/useCustomerApi'
+import { usePaginationContext } from './PaginationContext'
 
 interface CustomerContextProps {
   username: string
@@ -23,12 +24,14 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
   const { fetchCustomers } = useCustomerApi()
+  const { page, limit, setPage, setLimit, setTotalItems } = usePaginationContext()
 
   async function reloadCustomers() {
     setLoading(true)
     try {
-      const result = await fetchCustomers()
-      setCustomers(result?.data || [])
+      const result = await fetchCustomers(page, limit)
+      setCustomers(result?.customers || [])
+      setTotalItems(result?.total || 0)
     } catch (err) {
       setError(err as Error)
     } finally {
@@ -39,6 +42,8 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   function logout() {
     setUsername('')
     setSelectedCustomers([])
+    setPage(1)
+    setLimit(16)
   }
 
   useEffect(() => {
@@ -51,7 +56,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     reloadCustomers()
-  }, [fetchCustomers])
+  }, [fetchCustomers, page, limit])
 
   useEffect(() => {
     localStorage.setItem('customerInfo', JSON.stringify({ username, selectedCustomers }))
