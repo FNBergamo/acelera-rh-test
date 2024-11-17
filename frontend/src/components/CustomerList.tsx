@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ClientCard } from './ClientCard'
-import { CreateClientModal } from './CreateClientModal'
+import { CreateCustomerModal } from './Modal/CreateCustomerModal'
 import { useCustomerContext } from '../context/CustomerContext'
 import s from './CustomerList.module.css'
 
@@ -25,7 +25,7 @@ export function CustomerList() {
         <button className={s.createClientButton} onClick={() => setIsModalOpen(true)}>
           Criar cliente
         </button>
-        <CreateClientModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <CreateCustomerModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
     </div>
   )

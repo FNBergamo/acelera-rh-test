@@ -15,8 +15,8 @@ export function ClientCard({ name, salary, companyValue }: ClientCardProps) {
     <div className={s.clientCard}>
       <div className={s.clientInfo}>
         <p className={s.name}>{name}</p>
-        <p className={s.salary}>Salário: {salary}</p>
-        <p className={s.company}>Empresa: {companyValue}</p>
+        <p className={s.salary}>Salário: R${salary}</p>
+        <p className={s.company}>Empresa: R${companyValue}</p>
       </div>
       <div className={s.options}>
         <button>
