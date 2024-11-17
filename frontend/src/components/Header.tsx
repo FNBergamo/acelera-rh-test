@@ -3,6 +3,7 @@ import burguerMenu from '../assets/icons/burguer-menu.svg'
 import cn from 'classnames'
 import s from './Header.module.css'
 import { useNavigate } from 'react-router-dom'
+import { useCustomerContext } from '../context/CustomerContext'
 
 interface HeaderProps {
   readonly isSidebarOpen: boolean
@@ -11,8 +12,14 @@ interface HeaderProps {
 
 export function Header({ isSidebarOpen, setSidebarOpen }: HeaderProps) {
   const navigate = useNavigate()
+  const { username, logout } = useCustomerContext()
 
-  const toggleSidebar = () => {
+  function logoutUser() {
+    navigate('/wellcome')
+    logout()
+  }
+
+  function toggleSidebar() {
     setSidebarOpen(!isSidebarOpen)
   }
 
@@ -37,16 +44,18 @@ export function Header({ isSidebarOpen, setSidebarOpen }: HeaderProps) {
                 </button>
               </li>
               <li>
-                <button className={s.menuOption} onClick={() => navigate('/wellcome')}>
+                <button className={s.menuOption} onClick={logoutUser}>
                   Sair
                 </button>
               </li>
             </ul>
           </nav>
-          <p className={s.greetings}>Olá, Usuário!</p>
+          <p className={s.greetings}>
+            Olá, <b>{username}</b>!
+          </p>
         </div>
       </div>
-      <button className={cn(s.menuOption, s.logout)} onClick={() => navigate('/wellcome')}>
+      <button className={cn(s.menuOption, s.logout)} onClick={logoutUser}>
         Sair
       </button>
     </header>

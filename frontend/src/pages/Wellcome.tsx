@@ -1,10 +1,20 @@
 import { useNavigate } from 'react-router-dom'
 import s from './Wellcome.module.css'
+import { useCustomerContext } from '../context/CustomerContext'
+import { ChangeEvent, useState } from 'react'
 
 export function Wellcome() {
   const navigate = useNavigate()
+  const { setUsername } = useCustomerContext()
+  const [name, setName] = useState('')
+
+  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const { value } = e.target
+    setName(value)
+  }
 
   function login() {
+    setUsername(name)
     navigate('/')
   }
 
@@ -17,6 +27,8 @@ export function Wellcome() {
         id='name'
         name='name'
         placeholder='Digite o seu nome:'
+        value={name}
+        onChange={handleInputChange}
       />
       <button className={s.button} onClick={login}>
         Entrar
