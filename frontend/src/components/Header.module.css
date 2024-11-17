@@ -6,6 +6,10 @@
   left: 50px;
 }
 
+.buttonWrapper:hover {
+  border-radius: unset;
+}
+
 .burguerMenu {
   width: 30px;
 }
@@ -66,9 +70,16 @@
   font-weight: 400;
   border: none;
 }
-.menuOption:focus,
-.menuOption:focus-visible {
-  outline: none;
+
+.logout {
+  display: none;
+}
+
+.menuOption:hover,
+.logout:hover {
+  border-radius: unset;
+  font-weight: 700;
+  border-bottom: 2px solid var(--tango);
 }
 
 .greetings {
@@ -76,10 +87,6 @@
   white-space: nowrap;
   display: inline-block;
   flex: 1;
-}
-
-.logout {
-  display: none;
 }
 
 @media screen and (max-width: 1440px) {
@@ -113,7 +120,7 @@
   .logout {
     width: fit-content;
     display: block;
-    position: absolute;
+    position: relative;
     z-index: 3;
     right: 30px;
   }

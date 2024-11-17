@@ -1,0 +1,51 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageButton {
+  width: fit-content;
+  border: none;
+  padding: 0;
+  color: var(--black);
+  background-color: transparent;
+  padding: 13px 18px;
+  border-radius: 8px;
+}
+
+.pageButton:hover,
+.pageButton:focus {
+  border: 2px solid var(--tango);
+  outline-color: var(--tango);
+}
+
+.pageButton:disabled {
+  background-color: transparent;
+  color: var(--black);
+}
+
+.active {
+  border: 1px solid transparent;
+  font-size: 24px;
+  font-weight: 700;
+  font-family: inherit;
+  background-color: var(--tango);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.active:disabled {
+  background-color: var(--tango);
+  color: var(--white);
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.arrow {
+  font-weight: 900;
+}

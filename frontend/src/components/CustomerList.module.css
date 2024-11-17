@@ -26,31 +26,3 @@
   line-height: 17px;
   background-color: transparent;
 }
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.pageButton {
-  width: fit-content;
-  border: none;
-  padding: 0;
-  color: var(--black);
-  background-color: transparent;
-  padding: 13px 18px;
-  border-radius: 8px;
-}
-
-.active {
-  border: 1px solid transparent;
-  font-size: 24px;
-  font-weight: 700;
-  font-family: inherit;
-  background-color: var(--tango);
-  color: var(--white);
-  cursor: pointer;
-  color: white;
-}
