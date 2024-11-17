@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { ClientCard } from './ClientCard'
 import { useCustomerContext } from '../context/CustomerContext'
 import s from './SelectedCustomersList.module.css'
 import { Customer } from '../interfaces/customer'
 import { useCustomerApi } from '../hooks/useCustomerApi'
+import { CustomerCard } from './CustomerCard'
 
 export function SelectedCustomersList() {
   const { selectedCustomers } = useCustomerContext()
@@ -43,7 +43,7 @@ export function SelectedCustomersList() {
           <b>Clientes selecionados:</b>
         </p>
         {customers.map((customer) => (
-          <ClientCard
+          <CustomerCard
             key={customer.id}
             id={customer.id}
             name={customer.name}

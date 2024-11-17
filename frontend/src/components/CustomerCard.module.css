@@ -1,4 +1,4 @@
-.clientCard {
+.customerCard {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,7 +10,7 @@
   padding: 15px;
 }
 
-.clientInfo {
+.customerInfo {
   display: flex;
   flex-direction: column;
   gap: 10px;

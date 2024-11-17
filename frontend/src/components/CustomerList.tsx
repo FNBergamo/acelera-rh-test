@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ClientCard } from './ClientCard'
+import { CustomerCard } from './CustomerCard'
 import { CreateCustomerModal } from './Modal/CreateCustomerModal'
 import { useCustomerContext } from '../context/CustomerContext'
 import s from './CustomerList.module.css'
@@ -16,7 +16,7 @@ export function CustomerList() {
           <b>{customers.length}</b> clientes encontrados:
         </p>
         {customers.map((customer) => (
-          <ClientCard
+          <CustomerCard
             key={customer.id}
             id={customer.id}
             name={customer.name}

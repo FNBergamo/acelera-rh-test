@@ -71,7 +71,7 @@ export function DeleteCustomerModal({ isOpen, onClose, id }: DeleteCustomerModal
           Você está prestes a excluir o cliente: <b>{customer.name}</b>
         </p>
         <button className={s.submitButton} onClick={deleteSelectedCustomer}>
-          Excluir cliente:
+          Excluir cliente
         </button>
       </div>
     </Modal>

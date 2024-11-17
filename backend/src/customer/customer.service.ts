@@ -27,6 +27,7 @@ export class CustomerService {
     const [customers, total] = await this.customerRepository.findAndCount({
       skip: (page - 1) * adjustedLimit,
       take: adjustedLimit,
+      order: { id: 'ASC' },
     });
 
     this.logger.debug(

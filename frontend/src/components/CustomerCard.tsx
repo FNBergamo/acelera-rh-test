@@ -3,27 +3,28 @@ import trash from '../assets/icons/trash.svg'
 import add from '../assets/icons/add.svg'
 import remove from '../assets/icons/remove.svg'
 import cn from 'classnames'
-import s from './ClientCard.module.css'
+import s from './CustomerCard.module.css'
 import { UpdateCustomerModal } from './Modal/UpdateCustomerModal'
 import { useState } from 'react'
 import { DeleteCustomerModal } from './Modal/DeleteCustomerModal'
 import { useCustomerContext } from '../context/CustomerContext'
 import { useLocation } from 'react-router-dom'
 
-interface ClientCardProps {
+interface CustomerCardProps {
   readonly id: number
   readonly name: string
   readonly salary: number
   readonly companyValue: number
 }
 
-export function ClientCard({ id, name, salary, companyValue }: ClientCardProps) {
+export function CustomerCard({ id, name, salary, companyValue }: CustomerCardProps) {
   const { pathname } = useLocation()
   const { removeCustomerFromSelection } = useCustomerContext()
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const { selectedCustomers, addCustomerToSelection } = useCustomerContext()
-  const isButtonHidden = selectedCustomers.includes(id) || pathname === '/selected-customers'
+  const isButtonHidden = pathname === '/selected-customers'
+  const isAddButtonHidden = selectedCustomers.includes(id) || isButtonHidden
   const removeCard = !selectedCustomers.includes(id) && pathname === '/selected-customers'
 
   function renderRemoveAndDeleteButton() {
@@ -39,15 +40,15 @@ export function ClientCard({ id, name, salary, companyValue }: ClientCardProps) 
   }
 
   return (
-    <div className={cn(s.clientCard, { [s.remove]: removeCard })}>
-      <div className={s.clientInfo}>
+    <div className={cn(s.customerCard, { [s.remove]: removeCard })}>
+      <div className={s.customerInfo}>
         <p className={s.name}>{name}</p>
         <p className={s.salary}>Salário: R${salary}</p>
         <p className={s.company}>Empresa: R${companyValue}</p>
       </div>
       <div className={s.options}>
         <button
-          className={cn({ [s.hidden]: isButtonHidden })}
+          className={cn({ [s.hidden]: isAddButtonHidden })}
           disabled={isButtonHidden}
           onClick={() => addCustomerToSelection(id)}
         >
