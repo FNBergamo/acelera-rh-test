@@ -4,6 +4,7 @@ import { CreateCustomerModal } from './Modal/CreateCustomerModal'
 import { useCustomerContext } from '../context/CustomerContext'
 import { usePaginationContext } from '../context/PaginationContext'
 import { generatePagination } from '../helper/generatePagination'
+import cn from 'classnames'
 import s from './CustomerList.module.css'
 
 export function CustomerList() {
@@ -33,7 +34,7 @@ export function CustomerList() {
           {generatePagination(page, Math.ceil(totalItems / limit)).map((item, index) => (
             <button
               key={index}
-              className={s.pageButton}
+              className={cn(s.pageButton, { [s.active]: item === page })}
               onClick={() => typeof item === 'number' && setPage(item)}
               disabled={item === page || typeof item !== 'number'}
             >
