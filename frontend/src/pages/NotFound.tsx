@@ -17,7 +17,7 @@ export function NotFound() {
         <div className={s.text}>
           <h1 className={s.title}>404 - Página não encontrada</h1>
           <p className={s.message}>Desculpe, a página que esta procurando não existe.</p>
-          <button onClick={() => navigate('/customers')} className={s.goBack}>
+          <button onClick={() => navigate(ROUTES.CUSTOMERS)} className={s.goBack}>
             Voltar para página inicial
           </button>
         </div>

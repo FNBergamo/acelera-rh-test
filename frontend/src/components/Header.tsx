@@ -4,6 +4,7 @@ import cn from 'classnames'
 import s from './Header.module.css'
 import { useNavigate } from 'react-router-dom'
 import { useCustomerContext } from '../context/CustomerContext'
+import { ROUTES } from '../constants/routes'
 
 interface HeaderProps {
   readonly isSidebarOpen: boolean
@@ -15,7 +16,7 @@ export function Header({ isSidebarOpen, setSidebarOpen }: HeaderProps) {
   const { username, logout } = useCustomerContext()
 
   function logoutUser() {
-    navigate('/')
+    navigate(ROUTES.WELLCOME)
     logout()
   }
 
@@ -34,12 +35,15 @@ export function Header({ isSidebarOpen, setSidebarOpen }: HeaderProps) {
           <nav className={s.menu}>
             <ul>
               <li>
-                <button className={s.menuOption} onClick={() => navigate('/customers')}>
+                <button className={s.menuOption} onClick={() => navigate(ROUTES.CUSTOMERS)}>
                   Clientes
                 </button>
               </li>
               <li>
-                <button className={s.menuOption} onClick={() => navigate('/selected-customers')}>
+                <button
+                  className={s.menuOption}
+                  onClick={() => navigate(ROUTES.SELECTED_CUSTOMERS)}
+                >
                   Clientes Selecionados
                 </button>
               </li>

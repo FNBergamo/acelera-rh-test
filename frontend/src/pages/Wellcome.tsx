@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import s from './Wellcome.module.css'
 import { useCustomerContext } from '../context/CustomerContext'
 import { ChangeEvent, useEffect, useState } from 'react'
+import { ROUTES } from '../constants/routes'
 
 export function Wellcome() {
   const navigate = useNavigate()
@@ -11,7 +12,7 @@ export function Wellcome() {
 
   useEffect(() => {
     if (username) {
-      navigate('/customers', { replace: true })
+      navigate(ROUTES.CUSTOMERS, { replace: true })
     }
   }, [username, navigate])
 
@@ -29,7 +30,7 @@ export function Wellcome() {
       return
     }
     setUsername(name)
-    navigate('/customers')
+    navigate(ROUTES.CUSTOMERS)
   }
 
   return (

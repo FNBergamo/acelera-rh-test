@@ -6,14 +6,15 @@ import './App.css'
 import ProtectedRoute from './components/ProtectedRoute'
 import { NotFound } from './pages/NotFound'
 import { ComingSoon } from './pages/ComingSoon'
+import { ROUTES } from './constants/routes'
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Wellcome />} />
+        <Route path={ROUTES.WELLCOME} element={<Wellcome />} />
         <Route
-          path='/customers'
+          path={ROUTES.CUSTOMERS}
           element={
             <ProtectedRoute>
               <Customers />
@@ -21,15 +22,15 @@ function App() {
           }
         />
         <Route
-          path='/selected-customers'
+          path={ROUTES.SELECTED_CUSTOMERS}
           element={
             <ProtectedRoute>
               <SelectedCustomers />
             </ProtectedRoute>
           }
         />
-        <Route path='/coming-soon' element={<ComingSoon />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path={ROUTES.COMING_SOON} element={<ComingSoon />} />
+        <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { DeleteCustomerModal } from './Modal/DeleteCustomerModal'
 import { useCustomerContext } from '../context/CustomerContext'
 import { useLocation } from 'react-router-dom'
+import { ROUTES } from '../constants/routes'
 
 interface CustomerCardProps {
   readonly id: number
@@ -23,9 +24,9 @@ export function CustomerCard({ id, name, salary, companyValue }: CustomerCardPro
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const { selectedCustomers, addCustomerToSelection } = useCustomerContext()
-  const isButtonHidden = pathname === '/selected-customers'
+  const isButtonHidden = pathname === ROUTES.SELECTED_CUSTOMERS
   const isAddButtonHidden = selectedCustomers.includes(id) || isButtonHidden
-  const removeCard = !selectedCustomers.includes(id) && pathname === '/selected-customers'
+  const removeCard = !selectedCustomers.includes(id) && pathname === ROUTES.SELECTED_CUSTOMERS
 
   function renderRemoveAndDeleteButton() {
     return !isButtonHidden ? (

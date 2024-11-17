@@ -6,6 +6,7 @@ import home from '../assets/icons/home.svg'
 import products from '../assets/icons/products.svg'
 import leftArrow from '../assets/icons/left-arrow.svg'
 import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../constants/routes'
 
 interface SidebarProps {
   readonly isSidebarOpen: boolean
@@ -33,19 +34,19 @@ export function Sidebar({ isSidebarOpen, setSidebarOpen }: SidebarProps) {
         </div>
         <ul>
           <li className={s.menuOption}>
-            <button onClick={() => navigate('/customers')} className={s.menuButton}>
+            <button onClick={() => navigate(ROUTES.CUSTOMERS)} className={s.menuButton}>
               <img className={s.menuIcon} src={home} alt='Home' />
               <p>Home</p>
             </button>
           </li>
           <li className={s.menuOption}>
-            <button onClick={() => navigate('/customers')} className={s.menuButton}>
+            <button onClick={() => navigate(ROUTES.CUSTOMERS)} className={s.menuButton}>
               <img className={s.menuIcon} src={customer} alt='Clientes' />
               <p>Clientes</p>
             </button>
           </li>
           <li className={s.menuOption}>
-            <button onClick={() => navigate('/coming-soon')} className={s.menuButton}>
+            <button onClick={() => navigate(ROUTES.COMING_SOON)} className={s.menuButton}>
               <img className={s.menuIcon} src={products} alt='Produtos' />
               <p>Produtos</p>
             </button>
