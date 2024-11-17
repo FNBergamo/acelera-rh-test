@@ -18,7 +18,7 @@ interface CustomerContextProps {
 
 const CustomerContext = createContext<CustomerContextProps | undefined>(undefined)
 
-export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export function CustomerProvider({ children }: { children: React.ReactNode }) {
   const [username, setUsername] = useState<string>('')
   const [customers, setCustomers] = useState<Customer[]>([])
   const [selectedCustomers, setSelectedCustomers] = useState<number[]>([])
@@ -98,7 +98,7 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   )
 }
 
-export const useCustomerContext = () => {
+export function useCustomerContext() {
   const context = useContext(CustomerContext)
   if (!context) {
     throw new Error('useCustomerContext deve ser usado dentro de CustomerProvider')

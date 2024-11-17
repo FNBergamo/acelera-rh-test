@@ -4,6 +4,7 @@ import { Modal } from './Modal'
 import { useCustomerApi } from '../../hooks/useCustomerApi'
 import { useCustomerContext } from '../../context/CustomerContext'
 import s from './CreateCustomerModal.module.css'
+import { LoadingOverlay } from '../LoadingOverlay'
 
 interface CreateCustomerModalProps {
   readonly isOpen: boolean
@@ -13,7 +14,6 @@ interface CreateCustomerModalProps {
 export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProps) {
   const { createCustomer } = useCustomerApi()
   const { reloadCustomers } = useCustomerContext()
-  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
 
   const [customer, setCustomer] = useState<CreateCustomerDto>({
@@ -44,20 +44,14 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
 
   async function createNewCustomer(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setLoading(true)
     try {
       await createCustomer(customer)
     } catch (error) {
       setError(error as Error)
     } finally {
-      setLoading(false)
       reloadCustomers()
       closeModal()
     }
-  }
-
-  if (loading) {
-    return <p>Carregando...</p>
   }
 
   if (error) {

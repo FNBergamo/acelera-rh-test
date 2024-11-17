@@ -14,7 +14,6 @@ interface UpdateCustomerModalProps {
 export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModalProps) {
   const { updateCustomer, fetchCustomersById } = useCustomerApi()
   const { reloadCustomers } = useCustomerContext()
-  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
   const [customer, setCustomer] = useState<Customer>({
     id: 0,
@@ -30,8 +29,6 @@ export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModal
         setCustomer(response.data)
       } catch (error) {
         setError(error as Error)
-      } finally {
-        setLoading(false)
       }
     }
     getCustomer()
@@ -52,20 +49,14 @@ export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModal
 
   async function update(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    setLoading(true)
     try {
       await updateCustomer(id, customer)
     } catch (error) {
       setError(error as Error)
     } finally {
-      setLoading(false)
       reloadCustomers()
       closeModal()
     }
-  }
-
-  if (loading) {
-    return <p>Carregando...</p>
   }
 
   if (error) {

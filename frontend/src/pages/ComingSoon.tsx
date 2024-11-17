@@ -1,6 +1,7 @@
 import s from './ComingSoon.module.css'
 import comingSoon from '../assets/coming-soon.png'
 import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../constants/routes'
 
 export function ComingSoon() {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ export function ComingSoon() {
         <div className={s.text}>
           <h1 className={s.title}>Novidades a caminho</h1>
           <p className={s.message}>Em breve, a página estará disponível. Fique ligado!</p>
-          <button onClick={() => navigate('/customers')} className={s.goBack}>
+          <button onClick={() => navigate(ROUTES.CUSTOMERS)} className={s.goBack}>
             Voltar para página inicial
           </button>
         </div>

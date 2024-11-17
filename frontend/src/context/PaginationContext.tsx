@@ -14,7 +14,7 @@ const DEFAULT_LIMIT = 16
 
 const PaginationContext = createContext<PaginationContextProps | undefined>(undefined)
 
-export const PaginationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export function PaginationProvider({ children }: { children: React.ReactNode }) {
   const [page, setPage] = useState(DEFAULT_PAGE)
   const [limit, setLimit] = useState(DEFAULT_LIMIT)
   const [totalItems, setTotalItems] = useState(0)
@@ -35,7 +35,7 @@ export const PaginationProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   )
 }
 
-export const usePaginationContext = () => {
+export function usePaginationContext() {
   const context = useContext(PaginationContext)
   if (!context) {
     throw new Error('usePaginationContext deve ser usado dentro de PaginationProvider')

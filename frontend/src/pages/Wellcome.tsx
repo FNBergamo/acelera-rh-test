@@ -3,6 +3,7 @@ import s from './Wellcome.module.css'
 import { useCustomerContext } from '../context/CustomerContext'
 import { ChangeEvent, useEffect, useState } from 'react'
 import { ROUTES } from '../constants/routes'
+import { LoadingOverlay } from '../components/LoadingOverlay'
 
 export function Wellcome() {
   const navigate = useNavigate()
@@ -17,7 +18,7 @@ export function Wellcome() {
   }, [username, navigate])
 
   if (loading) {
-    return <h1>Carregando...</h1>
+    return <LoadingOverlay show={loading} />
   }
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {

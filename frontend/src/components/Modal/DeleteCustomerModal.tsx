@@ -14,7 +14,6 @@ interface DeleteCustomerModalProps {
 export function DeleteCustomerModal({ isOpen, onClose, id }: DeleteCustomerModalProps) {
   const { deleteCustomer, fetchCustomersById } = useCustomerApi()
   const { reloadCustomers } = useCustomerContext()
-  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
   const [customer, setCustomer] = useState<Customer>({
     id: 0,
@@ -30,8 +29,6 @@ export function DeleteCustomerModal({ isOpen, onClose, id }: DeleteCustomerModal
         setCustomer(response.data)
       } catch (error) {
         setError(error as Error)
-      } finally {
-        setLoading(false)
       }
     }
     getCustomer()
@@ -43,20 +40,14 @@ export function DeleteCustomerModal({ isOpen, onClose, id }: DeleteCustomerModal
   }
 
   async function deleteSelectedCustomer() {
-    setLoading(true)
     try {
       await deleteCustomer(id)
     } catch (error) {
       setError(error as Error)
     } finally {
-      setLoading(false)
       reloadCustomers()
       closeModal()
     }
-  }
-
-  if (loading) {
-    return <p>Carregando...</p>
   }
 
   if (error) {

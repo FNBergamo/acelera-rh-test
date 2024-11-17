@@ -8,10 +8,9 @@ import { CustomerCard } from './CustomerCard'
 export function SelectedCustomersList() {
   const { selectedCustomers } = useCustomerContext()
   const { fetchCustomersById } = useCustomerApi()
-  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
 
-  console.log(loading, error)
+  console.log(error)
 
   const [customers, setCustomers] = useState<Customer[]>([])
 
@@ -29,8 +28,6 @@ export function SelectedCustomersList() {
         })
       } catch (error) {
         setError(error as Error)
-      } finally {
-        setLoading(false)
       }
     }
     getCustomer()

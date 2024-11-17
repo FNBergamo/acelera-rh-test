@@ -2,6 +2,7 @@ import './NotFound.module.css'
 import errorRobot from '../assets/icons/error-robot.svg'
 import s from './NotFound.module.css'
 import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../constants/routes'
 
 export function NotFound() {
   const navigate = useNavigate()

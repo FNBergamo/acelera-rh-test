@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useCustomerContext } from '../context/CustomerContext'
 import { ROUTES } from '../constants/routes'
+import { LoadingOverlay } from './LoadingOverlay'
 
 function ProtectedRoute({ children }: { children: JSX.Element }) {
   const { username } = useCustomerContext()
@@ -17,7 +18,7 @@ function ProtectedRoute({ children }: { children: JSX.Element }) {
   }, [username, navigate, location.pathname])
 
   if (!username && protectedRoutes.includes(location.pathname)) {
-    return <h1>Carregando...</h1>
+    return <LoadingOverlay show={true} />
   }
 
   return children
