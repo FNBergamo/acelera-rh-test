@@ -17,6 +17,7 @@ export function CustomerList() {
         {customers.map((customer) => (
           <ClientCard
             key={customer.id}
+            id={customer.id}
             name={customer.name}
             salary={customer.salary}
             companyValue={customer.companyValue}

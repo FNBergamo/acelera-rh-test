@@ -1,26 +1,41 @@
-import { useState, ChangeEvent } from 'react'
-import { CreateCustomerDto } from '../../interfaces/customer'
+import { useState, ChangeEvent, useEffect } from 'react'
+import { Customer } from '../../interfaces/customer'
 import { Modal } from './Modal'
 import { useCustomerApi } from '../../hooks/useCustomerApi'
 import { useCustomerContext } from '../../context/CustomerContext'
-import s from './CreateCustomerModal.module.css'
+import s from './UpdateCustomerModal.module.css'
 
-interface CreateCustomerModalProps {
+interface UpdateCustomerModalProps {
   readonly isOpen: boolean
   readonly onClose: () => void
+  readonly id: number
 }
 
-export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProps) {
-  const { createCustomer } = useCustomerApi()
+export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModalProps) {
+  const { updateCustomer, fetchCustomersById } = useCustomerApi()
   const { reloadCustomers } = useCustomerContext()
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
-
-  const [customer, setCustomer] = useState<CreateCustomerDto>({
+  const [customer, setCustomer] = useState<Customer>({
+    id: 0,
     name: '',
     salary: 0,
     companyValue: 0,
   })
+
+  useEffect(() => {
+    async function getCustomer() {
+      try {
+        const response = await fetchCustomersById(id)
+        setCustomer(response.data)
+      } catch (error) {
+        setError(error as Error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    getCustomer()
+  }, [id, fetchCustomersById])
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target
@@ -33,18 +48,13 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
   function closeModal() {
     onClose()
     setError(null)
-    setCustomer({
-      name: '',
-      salary: 0,
-      companyValue: 0,
-    })
   }
 
-  async function createNewCustomer(event: React.FormEvent<HTMLFormElement>) {
+  async function update(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setLoading(true)
     try {
-      await createCustomer(customer)
+      await updateCustomer(id, customer)
     } catch (error) {
       setError(error as Error)
     } finally {
@@ -59,14 +69,14 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
   }
 
   if (error) {
-    return <p>Erro ao criar o cliente: {error.message}</p>
+    return <p>Erro ao editar o cliente selecionado: {error.message}</p>
   }
 
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
       <div className={s.modalContent}>
-        <p className={s.title}>Criar cliente:</p>
-        <form className={s.form} onSubmit={createNewCustomer}>
+        <p className={s.title}>Editar cliente:</p>
+        <form className={s.form} onSubmit={update}>
           <div className={s.inputWrapper}>
             <input
               className={s.input}
@@ -100,7 +110,7 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
             />
           </div>
           <button className={s.submitButton} type='submit'>
-            Criar cliente
+            Editar cliente
           </button>
         </form>
       </div>
