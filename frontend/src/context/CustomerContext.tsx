@@ -28,11 +28,13 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const { page, limit, setPage, setLimit, setTotalItems } = usePaginationContext()
 
   useEffect(() => {
+    setLoading(true)
     const retrievedObject = JSON.parse(localStorage.getItem('customerInfo') || '{}')
     if (retrievedObject?.username) {
       setUsername(retrievedObject.username)
       setSelectedCustomers(retrievedObject.selectedCustomers)
     }
+    setLoading(false)
   }, [])
 
   useEffect(() => {

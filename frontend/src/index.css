@@ -62,6 +62,11 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+button:disabled {
+  background-color: var(--alto);
+  color: var(--silver-chalice);
+  cursor: not-allowed;
+}
 
 input[type='text'] {
   border: 2px solid var(--alto);
