@@ -1,0 +1,47 @@
+.ComingSoon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--wild-sand);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  max-width: 1200px;
+  padding: 30px;
+}
+
+.image {
+  max-width: 300px;
+}
+
+.text {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 20px;
+  width: fit-content;
+}
+
+.goBack {
+  width: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .title,
+  .message {
+    text-align: center;
+  }
+
+  .text {
+    align-items: center;
+  }
+}

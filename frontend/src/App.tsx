@@ -4,6 +4,8 @@ import { Customers } from './pages/Customers'
 import { SelectedCustomers } from './pages/SelectedCustomers'
 import './App.css'
 import ProtectedRoute from './components/ProtectedRoute'
+import { NotFound } from './pages/NotFound'
+import { ComingSoon } from './pages/ComingSoon'
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path='/coming-soon' element={<ComingSoon />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
