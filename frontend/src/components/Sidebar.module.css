@@ -65,10 +65,37 @@
   bottom: -15px;
 }
 
+.arrowButton:hover {
+  background-color: var(--tango);
+}
+
 .leftArrow {
   width: 16px;
 }
 
 .greetings {
   display: none;
+}
+
+.menuButton {
+  background-color: transparent;
+  border: none;
+  padding: unset;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.menuOption:hover {
+  border-right: 2px solid var(--tango);
+}
+
+.menuOption:hover .menuIcon {
+  filter: var(--tango-filter);
+}
+
+.menuButton:hover p {
+  color: var(--tango);
 }

@@ -14,6 +14,10 @@
   width: 30px;
 }
 
+.burguerMenu:hover {
+  filter: var(--tango-filter);
+}
+
 .menu {
   display: flex;
   align-items: center;
@@ -77,9 +81,8 @@
 
 .menuOption:hover,
 .logout:hover {
-  border-radius: unset;
   font-weight: 700;
-  border-bottom: 2px solid var(--tango);
+  color: var(--tango);
 }
 
 .greetings {

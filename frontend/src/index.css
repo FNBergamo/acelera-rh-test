@@ -20,6 +20,8 @@
   --mine-shaft-darker: #1f1f1f;
   --cod-gray: #141414;
   --ebony: #0f1729;
+  --tango-filter: invert(47%) sepia(66%) saturate(1785%) hue-rotate(340deg) brightness(96%)
+    contrast(99%);
 
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

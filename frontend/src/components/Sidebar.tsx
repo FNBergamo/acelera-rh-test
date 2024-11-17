@@ -30,16 +30,22 @@ export function Sidebar({ isSidebarOpen, setSidebarOpen }: SidebarProps) {
         </div>
         <ul>
           <li className={s.menuOption}>
-            <img className={s.menuIcon} src={home} alt='Home' />
-            <p>Home</p>
+            <button className={s.menuButton}>
+              <img className={s.menuIcon} src={home} alt='Home' />
+              <p>Home</p>
+            </button>
           </li>
           <li className={s.menuOption}>
-            <img className={s.menuIcon} src={customer} alt='Clientes' />
-            <p>Clientes</p>
+            <button className={s.menuButton}>
+              <img className={s.menuIcon} src={customer} alt='Clientes' />
+              <p>Clientes</p>
+            </button>
           </li>
           <li className={s.menuOption}>
-            <img className={s.menuIcon} src={products} alt='Produtos' />
-            <p>Produtos</p>
+            <button className={s.menuButton}>
+              <img className={s.menuIcon} src={products} alt='Produtos' />
+              <p>Produtos</p>
+            </button>
           </li>
         </ul>
       </div>
