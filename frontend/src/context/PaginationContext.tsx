@@ -10,7 +10,7 @@ interface PaginationContextProps {
 }
 
 const DEFAULT_PAGE = 1
-const DEFAULT_LIMIT = 4
+const DEFAULT_LIMIT = 16
 
 const PaginationContext = createContext<PaginationContextProps | undefined>(undefined)
 

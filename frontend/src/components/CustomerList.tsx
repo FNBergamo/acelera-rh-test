@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { ClientCard } from './ClientCard'
 import { CreateCustomerModal } from './Modal/CreateCustomerModal'
 import { useCustomerContext } from '../context/CustomerContext'
-import s from './CustomerList.module.css'
 import { usePaginationContext } from '../context/PaginationContext'
 import { generatePagination } from '../helper/generatePagination'
+import s from './CustomerList.module.css'
 
 export function CustomerList() {
   const [isModalOpen, setIsModalOpen] = useState(false)

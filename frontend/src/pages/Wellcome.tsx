@@ -15,7 +15,7 @@ export function Wellcome() {
 
   function login() {
     setUsername(name)
-    navigate('/')
+    navigate('/customers')
   }
 
   return (

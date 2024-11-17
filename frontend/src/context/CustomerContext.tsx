@@ -6,12 +6,13 @@ import { usePaginationContext } from './PaginationContext'
 interface CustomerContextProps {
   username: string
   customers: Customer[]
-  selectedCustomers: Customer[]
+  selectedCustomers: number[]
   loading: boolean
   error: Error | null
   reloadCustomers: () => Promise<void>
+  addCustomerToSelection: (id: number) => void
+  removeCustomerFromSelection: (id: number) => void
   setUsername: React.Dispatch<React.SetStateAction<string>>
-  setSelectedCustomers: React.Dispatch<React.SetStateAction<Customer[]>>
   logout: () => void
 }
 
@@ -20,11 +21,27 @@ const CustomerContext = createContext<CustomerContextProps | undefined>(undefine
 export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [username, setUsername] = useState<string>('')
   const [customers, setCustomers] = useState<Customer[]>([])
-  const [selectedCustomers, setSelectedCustomers] = useState<Customer[]>([])
+  const [selectedCustomers, setSelectedCustomers] = useState<number[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | null>(null)
   const { fetchCustomers } = useCustomerApi()
   const { page, limit, setPage, setLimit, setTotalItems } = usePaginationContext()
+
+  useEffect(() => {
+    const retrievedObject = JSON.parse(localStorage.getItem('customerInfo') || '{}')
+    if (retrievedObject?.username) {
+      setUsername(retrievedObject.username)
+      setSelectedCustomers(retrievedObject.selectedCustomers)
+    }
+  }, [])
+
+  useEffect(() => {
+    reloadCustomers()
+  }, [fetchCustomers, page, limit, selectedCustomers])
+
+  useEffect(() => {
+    localStorage.setItem('customerInfo', JSON.stringify({ username, selectedCustomers }))
+  }, [username, selectedCustomers])
 
   async function reloadCustomers() {
     setLoading(true)
@@ -46,21 +63,18 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLimit(16)
   }
 
-  useEffect(() => {
-    const retrievedObject = JSON.parse(localStorage.getItem('customerInfo') || '{}')
-    if (retrievedObject?.username) {
-      setUsername(retrievedObject.username)
-      setSelectedCustomers(retrievedObject.selectedCustomers)
-    }
-  }, [])
+  function addCustomerToSelection(customerId: number) {
+    setSelectedCustomers((prevSelected) => {
+      if (prevSelected.some((id) => id === customerId)) {
+        return prevSelected
+      }
+      return [...prevSelected, customerId]
+    })
+  }
 
-  useEffect(() => {
-    reloadCustomers()
-  }, [fetchCustomers, page, limit])
-
-  useEffect(() => {
-    localStorage.setItem('customerInfo', JSON.stringify({ username, selectedCustomers }))
-  }, [username, selectedCustomers])
+  function removeCustomerFromSelection(customerId: number) {
+    setSelectedCustomers((prevSelected) => prevSelected.filter((id) => id !== customerId))
+  }
 
   return (
     <CustomerContext.Provider
@@ -70,9 +84,10 @@ export const CustomerProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         selectedCustomers,
         loading,
         error,
-        reloadCustomers,
         setUsername,
-        setSelectedCustomers,
+        reloadCustomers,
+        addCustomerToSelection,
+        removeCustomerFromSelection,
         logout,
       }}
     >

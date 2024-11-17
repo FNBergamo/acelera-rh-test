@@ -15,7 +15,7 @@ export function Header({ isSidebarOpen, setSidebarOpen }: HeaderProps) {
   const { username, logout } = useCustomerContext()
 
   function logoutUser() {
-    navigate('/wellcome')
+    navigate('/')
     logout()
   }
 
@@ -34,12 +34,12 @@ export function Header({ isSidebarOpen, setSidebarOpen }: HeaderProps) {
           <nav className={s.menu}>
             <ul>
               <li>
-                <button className={s.menuOption} onClick={() => navigate('/wellcome')}>
+                <button className={s.menuOption} onClick={() => navigate('/customers')}>
                   Clientes
                 </button>
               </li>
               <li>
-                <button className={s.menuOption} onClick={() => navigate('/wellcome')}>
+                <button className={s.menuOption} onClick={() => navigate('/selected-customers')}>
                   Clientes Selecionados
                 </button>
               </li>
