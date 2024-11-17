@@ -94,6 +94,7 @@ export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModal
               type='number'
               placeholder='Salário'
               name='salary'
+              min={0}
               value={customer.salary}
               onChange={handleInputChange}
             />
@@ -105,6 +106,7 @@ export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModal
               type='number'
               placeholder='Valor da empresa'
               name='companyValue'
+              min={0}
               value={customer.companyValue}
               onChange={handleInputChange}
             />

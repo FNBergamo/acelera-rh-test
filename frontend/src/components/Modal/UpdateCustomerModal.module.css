@@ -52,6 +52,7 @@ input[type='number'] {
 }
 
 .inputPrefix {
+  width: fit-content;
   position: absolute;
   left: 11px;
 }

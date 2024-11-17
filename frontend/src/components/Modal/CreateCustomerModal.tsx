@@ -22,6 +22,8 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
     companyValue: 0,
   })
 
+  const isButtonDisabled = Object.values(customer).some((value) => !value)
+
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target
     setCustomer((prevCustomer) => ({
@@ -74,6 +76,7 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
               placeholder='Nome'
               name='name'
               value={customer.name}
+              required
               onChange={handleInputChange}
             />
           </div>
@@ -84,7 +87,9 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
               type='number'
               placeholder='Salário'
               name='salary'
+              min={0}
               value={customer.salary}
+              required
               onChange={handleInputChange}
             />
           </div>
@@ -95,11 +100,13 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
               type='number'
               placeholder='Valor da empresa'
               name='companyValue'
+              min={0}
               value={customer.companyValue}
+              required
               onChange={handleInputChange}
             />
           </div>
-          <button className={s.submitButton} type='submit'>
+          <button className={s.submitButton} type='submit' disabled={isButtonDisabled}>
             Criar cliente
           </button>
         </form>
