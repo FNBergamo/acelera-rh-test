@@ -6,13 +6,15 @@ import { CustomerModule } from './customer/customer.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'xalala',
-      database: 'acelerarh',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT, 10),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       autoLoadEntities: true,
-      synchronize: true,
+      synchronize: process.env.DB_SYNC === 'true',
+      ssl:
+        process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
     }),
     CustomerModule,
   ],
