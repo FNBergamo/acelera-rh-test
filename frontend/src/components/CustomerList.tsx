@@ -6,12 +6,14 @@ import s from './CustomerList.module.css'
 import { Pagination } from './Pagination'
 import { LoadingOverlay } from './LoadingOverlay'
 import { usePaginationContext } from '../context/PaginationContext'
+import { useNavigate } from 'react-router-dom'
 
 export function CustomerList() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { customers, loading } = useCustomerContext()
-  const { limit, setLimit } = usePaginationContext()
+  const { limit, setLimit, setPage } = usePaginationContext()
   const isListEmpty = customers.length === 0
+  const navigate = useNavigate()
 
   if (loading) {
     return <LoadingOverlay show={loading} />
@@ -33,7 +35,13 @@ export function CustomerList() {
   }
 
   function handleSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    setLimit(Number(event.target.value))
+    const newLimit = Number(event.target.value)
+    setLimit(newLimit)
+    setPage(1)
+    const queryParams = new URLSearchParams(location.search)
+    queryParams.set('page', '1')
+
+    navigate(`${location.pathname}?${queryParams.toString()}`, { replace: true })
   }
 
   return (
