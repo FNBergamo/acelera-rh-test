@@ -6,6 +6,8 @@ import { useCustomerContext } from '../../context/CustomerContext'
 import s from './CreateCustomerModal.module.css'
 import { toast } from 'react-toastify'
 
+const MAX_VALUE = 9999999999999.99
+
 interface CreateCustomerModalProps {
   readonly isOpen: boolean
   readonly onClose: () => void
@@ -25,10 +27,35 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target
-    setCustomer((prevCustomer) => ({
-      ...prevCustomer,
-      [name]: value,
-    }))
+
+    if (name === 'salary' || name === 'companyValue') {
+      if (parseFloat(value) > MAX_VALUE) {
+        toast.error(`Valor máximo permitido é R$ ${MAX_VALUE.toLocaleString()}`)
+        return
+      }
+
+      setCustomer((prevCustomer) => ({
+        ...prevCustomer,
+        [name]: value,
+      }))
+    } else {
+      setCustomer((prevCustomer) => ({
+        ...prevCustomer,
+        [name]: value,
+      }))
+    }
+  }
+
+  function handleBlur(e: React.FocusEvent<HTMLInputElement>) {
+    const { name, value } = e.target
+
+    if (name === 'salary' || name === 'companyValue') {
+      const formattedValue = value ? parseFloat(value).toFixed(2) : ''
+      setCustomer((prevCustomer) => ({
+        ...prevCustomer,
+        [name]: formattedValue,
+      }))
+    }
   }
 
   function closeModal() {
@@ -77,9 +104,11 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
               placeholder='Salário'
               name='salary'
               min={0}
+              step='0.01'
               value={customer.salary}
               required
               onChange={handleInputChange}
+              onBlur={handleBlur}
             />
           </div>
           <div className={s.inputWrapper}>
@@ -90,9 +119,11 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
               placeholder='Valor da empresa'
               name='companyValue'
               min={0}
+              step='0.01'
               value={customer.companyValue}
               required
               onChange={handleInputChange}
+              onBlur={handleBlur}
             />
           </div>
           <button className={s.submitButton} type='submit' disabled={isButtonDisabled}>
