@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react'
 import { Customer } from '../interfaces/customer'
 import { useCustomerApi } from '../hooks/useCustomerApi'
 import { usePaginationContext } from './PaginationContext'
+import { toast } from 'react-toastify'
 
 interface CustomerContextProps {
   username: string
@@ -53,6 +54,7 @@ export function CustomerProvider({ children }: { children: React.ReactNode }) {
       setTotalItems(result?.total || 0)
     } catch (err) {
       setError(err as Error)
+      toast.error('Erro ao buscar clientes')
     } finally {
       setLoading(false)
     }

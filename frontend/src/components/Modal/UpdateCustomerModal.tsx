@@ -4,6 +4,7 @@ import { Modal } from './Modal'
 import { useCustomerApi } from '../../hooks/useCustomerApi'
 import { useCustomerContext } from '../../context/CustomerContext'
 import s from './UpdateCustomerModal.module.css'
+import { toast } from 'react-toastify'
 
 interface UpdateCustomerModalProps {
   readonly isOpen: boolean
@@ -14,7 +15,6 @@ interface UpdateCustomerModalProps {
 export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModalProps) {
   const { updateCustomer, fetchCustomersById } = useCustomerApi()
   const { reloadCustomers } = useCustomerContext()
-  const [error, setError] = useState<Error | null>(null)
   const [customer, setCustomer] = useState<Customer>({
     id: 0,
     name: '',
@@ -27,8 +27,8 @@ export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModal
       try {
         const response = await fetchCustomersById(id)
         setCustomer(response.data)
-      } catch (error) {
-        setError(error as Error)
+      } catch {
+        toast.error('Erro ao buscar cliente selecionado')
       }
     }
     getCustomer()
@@ -44,23 +44,19 @@ export function UpdateCustomerModal({ isOpen, onClose, id }: UpdateCustomerModal
 
   function closeModal() {
     onClose()
-    setError(null)
   }
 
   async function update(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     try {
       await updateCustomer(id, customer)
-    } catch (error) {
-      setError(error as Error)
+      toast.success('Cliente editado com sucesso!')
+    } catch {
+      toast.error('Erro ao editar o cliente selecionado')
     } finally {
       reloadCustomers()
       closeModal()
     }
-  }
-
-  if (error) {
-    return <p>Erro ao editar o cliente selecionado: {error.message}</p>
   }
 
   return (

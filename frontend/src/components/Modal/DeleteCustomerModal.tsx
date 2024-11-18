@@ -4,6 +4,7 @@ import { Modal } from './Modal'
 import { useCustomerApi } from '../../hooks/useCustomerApi'
 import { useCustomerContext } from '../../context/CustomerContext'
 import s from './DeleteCustomerModal.module.css'
+import { toast } from 'react-toastify'
 
 interface DeleteCustomerModalProps {
   readonly isOpen: boolean
@@ -14,7 +15,6 @@ interface DeleteCustomerModalProps {
 export function DeleteCustomerModal({ isOpen, onClose, id }: DeleteCustomerModalProps) {
   const { deleteCustomer, fetchCustomersById } = useCustomerApi()
   const { reloadCustomers } = useCustomerContext()
-  const [error, setError] = useState<Error | null>(null)
   const [customer, setCustomer] = useState<Customer>({
     id: 0,
     name: '',
@@ -27,8 +27,8 @@ export function DeleteCustomerModal({ isOpen, onClose, id }: DeleteCustomerModal
       try {
         const response = await fetchCustomersById(id)
         setCustomer(response.data)
-      } catch (error) {
-        setError(error as Error)
+      } catch {
+        toast.error('Erro ao buscar cliente selecionado')
       }
     }
     getCustomer()
@@ -36,22 +36,18 @@ export function DeleteCustomerModal({ isOpen, onClose, id }: DeleteCustomerModal
 
   function closeModal() {
     onClose()
-    setError(null)
   }
 
   async function deleteSelectedCustomer() {
     try {
       await deleteCustomer(id)
-    } catch (error) {
-      setError(error as Error)
+      toast.success('Cliente deletado com sucesso!')
+    } catch {
+      toast.error('Erro ao deletar cliente')
     } finally {
       reloadCustomers()
       closeModal()
     }
-  }
-
-  if (error) {
-    return <p>Erro ao deletar o cliente selecionado: {error.message}</p>
   }
 
   return (

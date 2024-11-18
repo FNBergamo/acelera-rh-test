@@ -4,7 +4,7 @@ import { Modal } from './Modal'
 import { useCustomerApi } from '../../hooks/useCustomerApi'
 import { useCustomerContext } from '../../context/CustomerContext'
 import s from './CreateCustomerModal.module.css'
-import { LoadingOverlay } from '../LoadingOverlay'
+import { toast } from 'react-toastify'
 
 interface CreateCustomerModalProps {
   readonly isOpen: boolean
@@ -14,7 +14,6 @@ interface CreateCustomerModalProps {
 export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProps) {
   const { createCustomer } = useCustomerApi()
   const { reloadCustomers } = useCustomerContext()
-  const [error, setError] = useState<Error | null>(null)
 
   const [customer, setCustomer] = useState<CreateCustomerDto>({
     name: '',
@@ -34,7 +33,6 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
 
   function closeModal() {
     onClose()
-    setError(null)
     setCustomer({
       name: '',
       salary: 0,
@@ -46,16 +44,13 @@ export function CreateCustomerModal({ isOpen, onClose }: CreateCustomerModalProp
     event.preventDefault()
     try {
       await createCustomer(customer)
-    } catch (error) {
-      setError(error as Error)
+      toast.success('Cliente criado com sucesso!')
+    } catch {
+      toast.error('Erro ao criar cliente')
     } finally {
       reloadCustomers()
       closeModal()
     }
-  }
-
-  if (error) {
-    return <p>Erro ao criar o cliente: {error.message}</p>
   }
 
   return (

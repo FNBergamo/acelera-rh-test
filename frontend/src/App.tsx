@@ -7,32 +7,37 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { NotFound } from './pages/NotFound'
 import { ComingSoon } from './pages/ComingSoon'
 import { ROUTES } from './constants/routes'
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={ROUTES.WELLCOME} element={<Wellcome />} />
-        <Route
-          path={ROUTES.CUSTOMERS}
-          element={
-            <ProtectedRoute>
-              <Customers />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={ROUTES.SELECTED_CUSTOMERS}
-          element={
-            <ProtectedRoute>
-              <SelectedCustomers />
-            </ProtectedRoute>
-          }
-        />
-        <Route path={ROUTES.COMING_SOON} element={<ComingSoon />} />
-        <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path={ROUTES.WELLCOME} element={<Wellcome />} />
+          <Route
+            path={ROUTES.CUSTOMERS}
+            element={
+              <ProtectedRoute>
+                <Customers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.SELECTED_CUSTOMERS}
+            element={
+              <ProtectedRoute>
+                <SelectedCustomers />
+              </ProtectedRoute>
+            }
+          />
+          <Route path={ROUTES.COMING_SOON} element={<ComingSoon />} />
+          <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
+    </>
   )
 }
 

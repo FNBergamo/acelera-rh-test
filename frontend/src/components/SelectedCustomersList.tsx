@@ -4,13 +4,11 @@ import s from './SelectedCustomersList.module.css'
 import { Customer } from '../interfaces/customer'
 import { useCustomerApi } from '../hooks/useCustomerApi'
 import { CustomerCard } from './CustomerCard'
+import { toast } from 'react-toastify'
 
 export function SelectedCustomersList() {
   const { selectedCustomers } = useCustomerContext()
   const { fetchCustomersById } = useCustomerApi()
-  const [error, setError] = useState<Error | null>(null)
-
-  console.log(error)
 
   const [customers, setCustomers] = useState<Customer[]>([])
 
@@ -26,8 +24,8 @@ export function SelectedCustomersList() {
             return [...prevCustomers, response.data]
           })
         })
-      } catch (error) {
-        setError(error as Error)
+      } catch {
+        toast.error('Erro ao buscar clientes selecionados')
       }
     }
     getCustomer()
