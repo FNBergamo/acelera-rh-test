@@ -16,3 +16,20 @@
   max-width: 1260px;
   padding: 0 30px;
 }
+
+.removeAllSelected {
+  border: 2px solid var(--tango);
+  color: var(--tango);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 17px;
+  background-color: transparent;
+}
+
+.emptyList {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 200px 0;
+}

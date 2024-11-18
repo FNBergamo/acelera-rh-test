@@ -14,6 +14,7 @@ interface CustomerContextProps {
   addCustomerToSelection: (id: number) => void
   removeCustomerFromSelection: (id: number) => void
   setUsername: React.Dispatch<React.SetStateAction<string>>
+  setSelectedCustomers: React.Dispatch<React.SetStateAction<number[]>>
   logout: () => void
 }
 
@@ -89,6 +90,7 @@ export function CustomerProvider({ children }: { children: React.ReactNode }) {
         loading,
         error,
         setUsername,
+        setSelectedCustomers,
         reloadCustomers,
         addCustomerToSelection,
         removeCustomerFromSelection,
